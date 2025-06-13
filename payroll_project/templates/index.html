@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payroll System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Employee</h1>
+        <form action="/add_employee" method="post">
+            <input type="text" name="name" placeholder="Name" required><br>
+            <input type="number" name="emp_id" placeholder="Employee ID" required><br>
+            <select name="type" onchange="toggleFields(this.value)">
+                <option value="fulltime">Full-Time</option>
+                <option value="parttime">Part-Time</option>
+            </select><br>
+
+            <div id="fulltime">
+                <input type="number" name="salary" placeholder="Monthly Salary">
+            </div>
+
+            <div id="parttime" style="display:none;">
+                <input type="number" name="hours" placeholder="Hours Worked">
+                <input type="number" name="rate" placeholder="Hourly Rate">
+            </div>
+
+            <button type="submit">Add Employee</button>
+        </form>
+        <a href="/employees">View All Employees</a>
+    </div>
+
+    <script>
+        function toggleFields(type) {
+            document.getElementById("fulltime").style.display = type === "fulltime" ? "block" : "none";
+            document.getElementById("parttime").style.display = type === "parttime" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
